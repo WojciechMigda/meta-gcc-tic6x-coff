@@ -1,0 +1,7 @@
+.build-gcc
+.local
+.work-gmp
+.work-mpfr
+.work-mpc
+.work-isl
+.work-cloog
