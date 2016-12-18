@@ -21,8 +21,8 @@ function build_gcc {
 
   ../gcc-tic6x-coff/configure --target=${TARGET} --prefix=${PREFIX} --disable-nls --enable-languages=c,c++ --without-headers \
     --with-gmp=${PREFIX} --with-mpfr=${PREFIX} --with-mpc=${PREFIX} \
-    && make -j all-gcc \
-    && make -j install-gcc \
+    && make -j 4 all-gcc \
+    && make -j 4 install-gcc \
     #&& make -j all-target-libgcc \
     #&& make -j install-target-libgcc
 
