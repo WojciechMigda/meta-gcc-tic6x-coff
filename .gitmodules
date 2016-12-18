@@ -1,4 +1,4 @@
 [submodule "gcc-tic6x-coff"]
 	path = gcc-tic6x-coff
-	url = file://localhost/repo/github/gcc-tic6x-coff
+	url = https://github.com/WojciechMigda/gcc-tic6x-coff
 	branch = gcc-6-branch
