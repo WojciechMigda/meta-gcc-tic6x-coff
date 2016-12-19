@@ -2,7 +2,7 @@
 
 load test_helper
 
-CC=${BATS_TEST_DIRNAME}/../.local/bin/tic6x-none-coff-gcc
+CC=${BATS_TEST_DIRNAME}/../.local/bin/tic6x-none-elf-gcc
 CFLAGS="-S -o /dev/stdout -xc -"
 XCC="${CC} ${CFLAGS}"
 

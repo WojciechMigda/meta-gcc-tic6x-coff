@@ -12,7 +12,7 @@ function script_dir {
 
 
 export PREFIX=$(script_dir)/.local
-export TARGET=tic6x-none-coff
+export TARGET=tic6x-none-elf
 
 
 function build_gcc {
