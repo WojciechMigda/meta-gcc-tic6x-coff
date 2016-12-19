@@ -22,3 +22,10 @@ SRC
 
   assert_output_excludes_re "\.type\s\+function,\s*@function"
 }
+
+@test ".ident not generated" {
+  run ${XCC} <<SRC
+SRC
+
+  assert_output_excludes_re "\.ident\b"
+}
