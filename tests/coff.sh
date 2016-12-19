@@ -14,3 +14,11 @@ SRC
 
   assert_output_excludes_re ".size\w+function,\w+.-function"
 }
+
+@test ".type not generated for function" {
+  run ${XCC} <<SRC
+void function(void){}
+SRC
+
+  assert_output_excludes_re ".type\w+function,\w+@function"
+}
