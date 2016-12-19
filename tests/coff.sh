@@ -12,7 +12,7 @@ XCC="${CC} ${CFLAGS}"
 void function(void){}
 SRC
 
-  assert_output_excludes_re ".size\w+function,\w+.-function"
+  assert_output_excludes_re "\.size\s\+function,\s*.-function"
 }
 
 @test ".type not generated for function" {
@@ -20,5 +20,5 @@ SRC
 void function(void){}
 SRC
 
-  assert_output_excludes_re ".type\w+function,\w+@function"
+  assert_output_excludes_re "\.type\s\+function,\s*@function"
 }
