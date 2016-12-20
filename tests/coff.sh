@@ -29,3 +29,19 @@ SRC
 
   assert_output_excludes_re "\.ident\b"
 }
+
+@test ".c6xabi_attribute not generated" {
+  run ${XCC} <<SRC
+SRC
+
+  assert_output_excludes_re "\.c6xabi_attribute\b"
+}
+
+@test "TI build attributes are generated" {
+  run ${XCC} <<SRC
+SRC
+
+  assert_output_contains_re "\.battr\s\+\"TI\",\s*Tag_File,\s*1,\s*Tag_ABI_stack_align_needed(0)"
+  assert_output_contains_re "\.battr\s\+\"TI\",\s*Tag_File,\s*1,\s*Tag_ABI_stack_align_preserved(0)"
+  assert_output_contains_re "\.battr\s\+\"TI\",\s*Tag_File,\s*1,\s*Tag_Tramps_Use_SOC(1)"
+}
