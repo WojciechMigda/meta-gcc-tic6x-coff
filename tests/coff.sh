@@ -3,7 +3,7 @@
 load test_helper
 
 CC=${BATS_TEST_DIRNAME}/../.local/bin/tic6x-none-elf-gcc
-CFLAGS="-S -o /dev/stdout -xc -"
+CFLAGS="-fleading-underscore -g0 -S -o /dev/stdout -xc -"
 XCC="${CC} ${CFLAGS}"
 
 
@@ -12,7 +12,7 @@ XCC="${CC} ${CFLAGS}"
 void function(void){}
 SRC
 
-  assert_output_excludes_re "\.size\s\+function,\s*.-function"
+  assert_output_excludes_re "\.size\s\+_function,\s*.-_function"
 }
 
 @test ".type not generated for function" {
@@ -20,7 +20,7 @@ SRC
 void function(void){}
 SRC
 
-  assert_output_excludes_re "\.type\s\+function,\s*@function"
+  assert_output_excludes_re "\.type\s\+_function,\s*@function"
 }
 
 @test ".ident not generated" {
