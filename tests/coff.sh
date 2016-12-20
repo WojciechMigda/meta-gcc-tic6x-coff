@@ -45,3 +45,40 @@ SRC
   assert_output_contains_re "\.battr\s\+\"TI\",\s*Tag_File,\s*1,\s*Tag_ABI_stack_align_preserved(0)"
   assert_output_contains_re "\.battr\s\+\"TI\",\s*Tag_File,\s*1,\s*Tag_Tramps_Use_SOC(1)"
 }
+
+
+@test "global uninitialized char variable is defined" {
+  run ${XCC} <<SRC
+char varc;
+SRC
+
+  assert_output_contains_re "\.global\s\+_varc"
+  assert_output_contains_re "\.bss\s\+_varc\s*,\s*1\s*,\s*1"
+}
+
+@test "global uninitialized short variable is defined" {
+  run ${XCC} <<SRC
+short vars;
+SRC
+
+  assert_output_contains_re "\.global\s\+_vars"
+  assert_output_contains_re "\.bss\s\+_vars\s*,\s*2\s*,\s*2"
+}
+
+@test "global uninitialized struct variable is defined" {
+  run ${XCC} <<SRC
+struct _s { short m; } vars;
+SRC
+
+  assert_output_contains_re "\.global\s\+_vars"
+  assert_output_contains_re "_vars\s*:\s*\.usect\s\+\"\.far\"\s*,\s*2\s*,\s*2"
+}
+
+@test "global uninitialized array variable is defined" {
+  run ${XCC} <<SRC
+int vararr[5];
+SRC
+
+  assert_output_contains_re "\.global\s\+_vararr"
+  assert_output_contains_re "_vararr\s*:\s*\.usect\s\+\"\.far\"\s*,\s*20\s*,\s*8"
+}
