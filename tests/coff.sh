@@ -82,3 +82,21 @@ SRC
   assert_output_contains_re "\.global\s\+_vararr"
   assert_output_contains_re "_vararr\s*:\s*\.usect\s\+\"\.far\"\s*,\s*20\s*,\s*8"
 }
+
+@test ".ref is generated for external data symbol" {
+  run ${XCC} <<SRC
+extern const int xval;
+int fun(void) { return xval; }
+SRC
+
+  assert_output_contains_re "\.ref\s\+_xval"
+}
+
+@test ".ref is generated for external code symbol" {
+  run ${XCC} <<SRC
+int xfun();
+int fun(void) { return xfun(); }
+SRC
+
+  assert_output_contains_re "\.ref\s\+_xfun"
+}
